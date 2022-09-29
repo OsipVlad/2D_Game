@@ -4,23 +4,26 @@ public class Lessons : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
     [SerializeField] private SpriteRenderer _back;
+    [SerializeField] private CharacterView _characterView;
+    [SerializeField] private SpriteAnimationsConfig _spriteAnimationConfig;
 
     private ParalaxManager _paralaxManager;
     private SpriteAnimator _spriteAnimator;
-    private CharacterView _characterView;
+    private MainHeroWalker _mainHeroWalker;
 
     private void Start()
     {
         _paralaxManager = new ParalaxManager(_camera, _back.transform);
-        SpriteAnimationsConfig config = Resources.Load<SpriteAnimationsConfig>("SpriteAnimationsConfig");
-        _spriteAnimator = new SpriteAnimator(config);
-        _spriteAnimator.StartAnimation(_characterView.SpriteRenderer, Track.idle, true, 10);
+        _spriteAnimator = new SpriteAnimator(_spriteAnimationConfig);
+        
+        _mainHeroWalker = new MainHeroWalker(_characterView, _spriteAnimator);
     }
 
     private void Update()
     {
         _paralaxManager.Update();
-        _spriteAnimator?.Update();
+        _spriteAnimator.Update();
+        _mainHeroWalker.Update();
     }
 
     private void FixedUpdate()
