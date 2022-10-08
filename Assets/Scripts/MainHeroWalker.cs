@@ -35,7 +35,7 @@ public class MainHeroWalker
             _spriteAnimator.StartAnimation(_characterView.SpriteRenderer, isGoSideWay ? Track.walk : Track.idle, true, _characterView.AnimationSpeed);
             if(doJump && Mathf.Approximately(_yVelocity, 0))
             {
-                _yVelocity = _characterView.JumpStartSpeed;
+                _yVelocity = _characterView.JumpStartForce;
             }
             else if(_yVelocity < 0)
             {

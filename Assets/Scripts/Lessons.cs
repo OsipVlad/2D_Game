@@ -9,26 +9,26 @@ public class Lessons : MonoBehaviour
 
     private ParalaxManager _paralaxManager;
     private SpriteAnimator _spriteAnimator;
-    private MainHeroWalker _mainHeroWalker;
+    private MainHeroPhysicsWalker _mainHeroPhysicsWalker;
 
     private void Start()
     {
         _paralaxManager = new ParalaxManager(_camera, _back.transform);
         _spriteAnimator = new SpriteAnimator(_spriteAnimationConfig);
-        
-        _mainHeroWalker = new MainHeroWalker(_characterView, _spriteAnimator);
+        _mainHeroPhysicsWalker = new MainHeroPhysicsWalker(_characterView, _spriteAnimator);
+
     }
 
     private void Update()
     {
         _paralaxManager.Update();
         _spriteAnimator.Update();
-        _mainHeroWalker.Update();
+
     }
 
     private void FixedUpdate()
     {
-        
+        _mainHeroPhysicsWalker.FixedUpdate();
     }
 
     private void OnDestroy()
